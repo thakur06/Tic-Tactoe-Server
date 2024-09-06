@@ -10,9 +10,10 @@ app.use(cors());
 app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const api_key =     process.env.API_key;
-const api_secret =     process.env.API_SECRET;
+const api_key=process.env.API_key;
+const api_secret=process.env.API_SECRET;
 const connection = StreamChat.getInstance(api_key, api_secret);
+
 app.post("/signin", async(req, res) => {
     try {
         const { Fname, Lname, Uname, password } = req.body;
@@ -33,28 +34,29 @@ app.post("/login", async(req, res) => {
     try {
         const { users } = await connection.queryUsers({ Uname: name });
 
-        if (users.length == 0) return res.json({ message: "User not found" })
+        // if (users.length == 0) return res.json({ message: "User not found" })
 
-        const pass = await bcrypt.compare(password, users[0].hashedPassword);
-        const token = connection.createToken(users[0].id);
+        // const pass = await bcrypt.compare(password, users[0].hashedPassword);
+        // const token = connection.createToken(users[0].id);
 
-        if (pass) {
+        // if (pass) {
 
-            res.json({
-                token,
-                Fname: users[0].Fname,
-                Lname: users[0].Lname,
-                Uname: users[0].Uname,
-                uId: users[0].id
-            })
-        }
-        else {
+        //     res.json({
+        //         token,
+        //         Fname: users[0].Fname,
+        //         Lname: users[0].Lname,
+        //         Uname: users[0].Uname,
+        //         uId: users[0].id
+        //     })
+        // }
+        // else {
 
-            res.status(401).send({ mgs: "User not found", status: 404 });
-        }
+        //     res.status(401).send({ mgs: "User not found", status: 404 });
+        // }
 
+        res.send(users);
     } catch (error) {
-        console.error(error); // Log the full error for debugging
+        console.error(error);
         return res.status(500).json({ message: "Internal Server Error" });
 
 }
