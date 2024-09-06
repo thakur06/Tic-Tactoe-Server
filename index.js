@@ -7,6 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 require("dotenv").config();
 const PORT = process.env.PORT || 4000;
 app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const api_key =     process.env.API_key;
