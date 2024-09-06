@@ -8,7 +8,7 @@ const app = express();
 app.use(cors(
 
 ));
- 
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 dotenv.config();
 const api_key =     process.env.API_key;
