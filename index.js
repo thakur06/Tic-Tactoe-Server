@@ -32,7 +32,7 @@ app.post("/signin", async(req, res) => {
 app.post("/login", async(req, res) => {
     const { name, password } = req.body;
     try {
-        
+       const {users}=await connection.queryUsers({Uname:name})
 
         // if (users.length == 0) return res.json({ message: "User not found" })
 
@@ -54,7 +54,7 @@ app.post("/login", async(req, res) => {
         //     res.status(401).send({ mgs: "User not found", status: 404 });
         // }
 
-        res.send({name,password});
+        res.send(users);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Internal Server Error" });
