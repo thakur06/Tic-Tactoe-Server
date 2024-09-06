@@ -6,11 +6,7 @@ import dotenv from 'dotenv';
 import brcypt from "bcrypt"
 const app = express();
 app.use(cors(
-    {
-        origin: ["https://tic-tac-toe-mvp-8lg6.vercel.app"],
-        methods: ["POST", "GET"],
-        credentials: true
-    }
+
 ));
  
 app.use(express.json());
