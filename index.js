@@ -54,10 +54,10 @@ app.post("/login", async(req, res) => {
         }
 
     } catch (error) {
+        console.error(error); // Log the full error for debugging
+        return res.status(500).json({ message: "Internal Server Error" });
 
-        res.send(error);
-    }
-
+}
 })
 
 
